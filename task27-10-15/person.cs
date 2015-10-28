@@ -18,4 +18,17 @@ namespace task27_10_15
 
         public string phone { get; set; }
     }
+
+    public class RootObject
+    {
+        public string Error { get; set; }
+        public double Time { get; set; }
+        
+       
+    }
+    public class Hospitals
+    {
+        public string name { get; set; }
+    }
 }
+
