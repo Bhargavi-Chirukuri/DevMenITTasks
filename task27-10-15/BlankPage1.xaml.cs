@@ -22,6 +22,8 @@ namespace task27_10_15
     /// </summary>
     public sealed partial class BlankPage1 : Page
     {
+        public static List<Result> results = null;
+ 
         public BlankPage1()
         {
             this.InitializeComponent();
@@ -31,9 +33,14 @@ namespace task27_10_15
         {
             
             RootObject r1 = new RootObject();
-            
-            //gv2.ItemsSource = r1.results;
 
+            gv2.ItemsSource = results;
+
+        }
+
+        private void btn_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(MainPage));
         }
     }
 

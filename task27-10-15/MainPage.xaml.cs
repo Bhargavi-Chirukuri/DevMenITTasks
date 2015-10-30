@@ -32,13 +32,14 @@ namespace task27_10_15
         {
             this.InitializeComponent();
             loctypes = new List<string>() { "hospital", "bus_station", "food", "atm", "bank", "restaurant" };
-
+            
             //PushpinViewModel pvm = new PushpinViewModel();
             //pvm.PushpinList = new ObservableCollection<PushpinClass>();
 
             //pvm.PushpinList.Add(new PushpinClass() { Latitude = l2.lat, Longitude =l2.lng });
             //DataContext = pvm;
         }
+        
 
         Pushpin pp = new Pushpin();
         Location1 l2 = new Location1();
@@ -61,20 +62,32 @@ namespace task27_10_15
 
         }
 
+
+        Windows.Storage.ApplicationDataContainer session = Windows.Storage.ApplicationData.Current.LocalSettings;
+
         private async void comboplaces_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ComboBox b1 = sender as ComboBox;
             string types1 = loctypes[b1.SelectedIndex].ToString();
-
-            Uri li = new Uri("https://maps.googleapis.com/maps/api/place/search/json?types=" + types1 + "&location=" + l1.Latitude + "," + l1.Longitude + "&radius=1000&sensor=false&key=AIzaSyBTptqaDtNTB0Fmba3N98oWrucR0vuctRU");
-            HttpClient cli = new HttpClient();
-            string content = await cli.GetStringAsync(li);
-            RootObject r = JsonConvert.DeserializeObject<RootObject>(content);
-            gv1.ItemsSource = r.results;
-
-            Pushpin p = new Pushpin();
-            Location1 loc = new Location1();
            
+                Uri li = new Uri("https://maps.googleapis.com/maps/api/place/search/json?types=" + types1 + "&location=" + l1.Latitude + "," + l1.Longitude + "&radius=1000&sensor=false&key=AIzaSyBTptqaDtNTB0Fmba3N98oWrucR0vuctRU");
+                HttpClient cli = new HttpClient();
+                string content = await cli.GetStringAsync(li);
+                RootObject r = JsonConvert.DeserializeObject<RootObject>(content);
+                gv1.ItemsSource = r.results;
+            //List<Result> results = new List<Result>();
+            //List<Location1> ll = new List<Location1>();
+            
+            //// foreach(Location1 a in ll)
+            ////{
+            ////    Pushpin p = new Pushpin();
+            ////   // string loc="+ll.lat+","+ll.lng+";
+                  
+
+            ////   // map1.Children.Add(p);
+            ////   //MapLayer.SetPosition(p,ll);
+            ////    // Location1 loc = new Location1();
+            ////}
             //MapLayer.SetPosition(p,loc);
             //MapLayer.SetPosition(pp, l2);
 
@@ -93,7 +106,7 @@ namespace task27_10_15
             //var pushpinLayer = new MapLayer();
             ////pushpinLayer.Name = "PushPinLayer";
             //map1.Children.Add(pushpinLayer);
-           
+
             //var loc = new Location1();
             //var latt = loc.lat;
             //var lang = loc.lng;
@@ -106,14 +119,14 @@ namespace task27_10_15
         private void gv1_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             RootObject r1 = new RootObject();
-            
-
+            Result result = e.AddedItems[0] as Result;
+            BlankPage1.results = new List<Result>() { result };
             Frame.Navigate(typeof(BlankPage1));
 
 
         }
 
-       
+
         //class PushpinViewModel
         //{
         //    public ObservableCollection<PushpinClass> PushpinList { get; set; }
@@ -125,6 +138,5 @@ namespace task27_10_15
         //    public double Latitude { get; set; }
         //}
     }
-    }
+}
 
-    
