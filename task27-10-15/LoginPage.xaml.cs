@@ -37,6 +37,8 @@ namespace task27_10_15
         }
         private async void loginbtn_Click(object sender, RoutedEventArgs e)
         {
+            (App.Current as App).NavigateText = unametxt.Text;
+
             var path = ApplicationData.Current.LocalFolder.Path + "/myDb1.DB";
             var con = new SQLiteAsyncConnection(path);
             person p1 = new person();
@@ -45,7 +47,7 @@ namespace task27_10_15
            allpersons = await con.QueryAsync<person>("select name,password from person where name=" + "\'" + unametxt.Text + "\'" + "and password=" + "\'" + pwdtxt.Password + "\'");
            if (allpersons.Count == 1)
            {
-               
+
                p1 = allpersons[0];
                Frame.Navigate(typeof(MainPage));
                

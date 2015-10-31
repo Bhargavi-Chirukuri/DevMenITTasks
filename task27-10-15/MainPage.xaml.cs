@@ -59,61 +59,76 @@ namespace task27_10_15
             l1.Longitude = gp.Coordinate.Point.Position.Longitude;
             map1.SetView(l1, 15);
             MapLayer.SetPosition(pp1, l1);
+            //if(session.Values["page"] !=null)
+            //{
+            //    Frame.Navigate(typeof(MainPage));
+            //}
 
+            localsettings.Values["sessionsettings"] = task27_10_15.App.LoadComponent(this, System.Uri(task27-10-15\BlankPage1.xaml));
+            //localsettings.Values["sessionsetting"] = "task27-10-15";
+
+            Object value = localsettings.Values["sessionsetting"];
         }
 
 
-        Windows.Storage.ApplicationDataContainer session = Windows.Storage.ApplicationData.Current.LocalSettings;
+        Windows.Storage.ApplicationDataContainer localsettings = Windows.Storage.ApplicationData.Current.LocalSettings;
+
 
         private async void comboplaces_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ComboBox b1 = sender as ComboBox;
             string types1 = loctypes[b1.SelectedIndex].ToString();
-           
-                Uri li = new Uri("https://maps.googleapis.com/maps/api/place/search/json?types=" + types1 + "&location=" + l1.Latitude + "," + l1.Longitude + "&radius=1000&sensor=false&key=AIzaSyBTptqaDtNTB0Fmba3N98oWrucR0vuctRU");
-                HttpClient cli = new HttpClient();
-                string content = await cli.GetStringAsync(li);
-                RootObject r = JsonConvert.DeserializeObject<RootObject>(content);
-                gv1.ItemsSource = r.results;
+
+            Uri li = new Uri("https://maps.googleapis.com/maps/api/place/search/json?types=" + types1 + "&location=" + l1.Latitude + "," + l1.Longitude + "&radius=1000&sensor=false&key=AIzaSyBTptqaDtNTB0Fmba3N98oWrucR0vuctRU");
+            HttpClient cli = new HttpClient();
+            string content = await cli.GetStringAsync(li);
+            RootObject r = JsonConvert.DeserializeObject<RootObject>(content);
+            gv1.ItemsSource = r.results;
             //List<Result> results = new List<Result>();
-            //List<Location1> ll = new List<Location1>();
-            
-            //// foreach(Location1 a in ll)
-            ////{
-            ////    Pushpin p = new Pushpin();
-            ////   // string loc="+ll.lat+","+ll.lng+";
-                  
+            List<Location1> ll = new List<Location1>();
 
-            ////   // map1.Children.Add(p);
-            ////   //MapLayer.SetPosition(p,ll);
-            ////    // Location1 loc = new Location1();
-            ////}
-            //MapLayer.SetPosition(p,loc);
-            //MapLayer.SetPosition(pp, l2);
 
-            //var pushpinLayer = new MapLayer();
-            //pushpinLayer.Name = "PushPinLayer";
-            //map1.Children.Add(pushpinLayer);
+            // session.Values["page"] = Windows.ApplicationModel.Package.Current.InstalledLocation;
+            Pushpin p = new Pushpin();
+            foreach (Location1 a in ll)
+            {
 
-            //var location = new Location(GetLattitude(), GetLongitude);
-            //var pushpin = new Pushpin();
-            //pushpin.Name = "My New Pushpin";
 
-            //pushpinLayer.AddChild(pushpin);
-            //pushpin. = location;
-            //myMap.Children.Add(pushpin);
+                //string loc="+ll.lat+","+ll.lng+";
 
-            //var pushpinLayer = new MapLayer();
-            ////pushpinLayer.Name = "PushPinLayer";
-            //map1.Children.Add(pushpinLayer);
 
-            //var loc = new Location1();
-            //var latt = loc.lat;
-            //var lang = loc.lng;
-            //var pushpin = new Pushpin();
+                ////   // map1.Children.Add(p);
+                ////   //MapLayer.SetPosition(p,ll);
+                // Location1 loc = new Location1();
 
-            //pushpinLayer.Children(pushpin);
+                ////}
+                //MapLayer.SetPosition(p,loc);
+                //MapLayer.SetPosition(pp, l2);
 
+                //var pushpinLayer = new MapLayer();
+                //pushpinLayer.Name = "PushPinLayer";
+                //map1.Children.Add(pushpinLayer);
+
+                //var location = new Location(GetLattitude(), GetLongitude);
+                //var pushpin = new Pushpin();
+                //pushpin.Name = "My New Pushpin";
+
+                //pushpinLayer.AddChild(pushpin);
+                //pushpin. = location;
+                //myMap.Children.Add(pushpin);
+
+                //var pushpinLayer = new MapLayer();
+                ////pushpinLayer.Name = "PushPinLayer";
+                //map1.Children.Add(pushpinLayer);
+
+                //var loc = new Location1();
+                //var latt = loc.lat;
+                //var lang = loc.lng;
+                //var pushpin = new Pushpin();
+
+                //pushpinLayer.Children(pushpin);
+
+            }
         }
 
         private void gv1_SelectionChanged(object sender, SelectionChangedEventArgs e)
