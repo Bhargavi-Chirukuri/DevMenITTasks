@@ -8,8 +8,8 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        
-        <GridView x:Name="gv2"  HorizontalAlignment="Left" Margin="255,45,0,0" VerticalAlignment="Top" Width="770" Height="507">
+
+        <GridView x:Name="gv2"  HorizontalAlignment="Left" Margin="159,68,0,0" VerticalAlignment="Top" Width="651" Height="507">
             <GridView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>
@@ -21,8 +21,23 @@
             </GridView.ItemTemplate>
         </GridView>
         <Button x:Name="btn" Content="&lt;&lt;" HorizontalAlignment="Left" Margin="62,61,0,0" VerticalAlignment="Top" Height="61" Width="112" FontSize="40" BorderThickness="0" Click="btn_Click"/>
-        <AppBarToggleButton HorizontalAlignment="Left" Icon="Favorite" Label="Add Favourite&#xD;&#xA;" Margin="109,619,0,0" VerticalAlignment="Top" Checked="AppBarToggleButton_Checked"/>
+        <AppBarToggleButton x:Name="aptb" HorizontalAlignment="Left" Icon="Favorite" Label="Add Favourite&#xD;&#xA;" Margin="65,661,0,0" VerticalAlignment="Top" Checked="AppBarToggleButton_Checked" Height="97"/>
         <TextBlock x:Name="tblock" HorizontalAlignment="Left" Margin="1080,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="70" Width="276" FontSize="25"/>
+        <AppBar BorderThickness="1" Width="1327" HorizontalAlignment="Left" Margin="29,0,0,10" VerticalAlignment="Bottom" Height="105">
+            <AppBar>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Orientation="Horizontal"/>
+                    <StackPanel Grid.Column="1" HorizontalAlignment="Right" Orientation="Horizontal"/>
+                </Grid>
+            </AppBar>
+        </AppBar>
+        <Button x:Name="b1" Content="Show Favourites" HorizontalAlignment="Left" Margin="1077,537,0,0" VerticalAlignment="Top" Height="99" Width="223" BorderThickness="0" FontSize="25" Click="b1_Click"/>
+        <TextBlock x:Name="restb" HorizontalAlignment="Left" Margin="934,210,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="310" Width="401"/>
+
 
     </Grid>
 </Page>

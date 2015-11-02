@@ -10,6 +10,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Devices.Geolocation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Storage;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -58,17 +59,26 @@ namespace task27_10_15
             l1.Latitude = gp.Coordinate.Point.Position.Latitude;
             l1.Longitude = gp.Coordinate.Point.Position.Longitude;
             map1.SetView(l1, 15);
+           
             MapLayer.SetPosition(pp1, l1);
             //if(session.Values["page"] !=null)
             //{
             //    Frame.Navigate(typeof(MainPage));
             //}
 
-            localsettings.Values["sessionsettings"] = task27_10_15.App.LoadComponent(this, System.Uri(task27-10-15\BlankPage1.xaml));
-            //localsettings.Values["sessionsetting"] = "task27-10-15";
+            //localsettings.Values["sessionsettings"] = task27_10_15.App.LoadComponent(this, System.Uri(task27-10-15\BlankPage1.xaml));
+            ////localsettings.Values["sessionsetting"] = "task27-10-15";
+            MainPage m = new MainPage();
+            //Object value = localsettings.Values["sessionsetting"];
 
-            Object value = localsettings.Values["sessionsetting"];
+            //Windows.Storage.ApplicationData.Current.LocalSettings.Values["MainPage"] = sessionsettings;
+            //string sessionsettings = Windows.Storage.ApplicationData.Current.LocalSettings.Values[""];
+            
+            //   StorageFile sf = await ApplicationData.Current.LocalSettings.Values[MainPage];
+
+
         }
+
 
 
         Windows.Storage.ApplicationDataContainer localsettings = Windows.Storage.ApplicationData.Current.LocalSettings;
@@ -85,18 +95,32 @@ namespace task27_10_15
             RootObject r = JsonConvert.DeserializeObject<RootObject>(content);
             gv1.ItemsSource = r.results;
             //List<Result> results = new List<Result>();
-            List<Location1> ll = new List<Location1>();
+            //List<Location1> ll = new List<Location1>();
 
 
+
+            //r.results
             // session.Values["page"] = Windows.ApplicationModel.Package.Current.InstalledLocation;
-            Pushpin p = new Pushpin();
-            foreach (Location1 a in ll)
+
+            foreach (Result rs in r.results)
             {
+                Location ln = new Location();
+                ln.Latitude = rs.geometry.location.lat;
 
+                ln.Longitude = rs.geometry.location.lng;
+                Pushpin pp = new Pushpin();
+                
+                map1.Children.Add(pp);
 
+                MapLayer.SetPosition(pp, ln);
+            }
                 //string loc="+ll.lat+","+ll.lng+";
+            //map1.SetView(ln, 15);
+            
 
-
+            //BasicGeoposition{Latitude=res.geometry.location.lat,Longitude=res.geometry.location.lng};
+            //ln.Latitude = rs.lat;
+            //ln.Longitude = rs.lng;
                 ////   // map1.Children.Add(p);
                 ////   //MapLayer.SetPosition(p,ll);
                 // Location1 loc = new Location1();
@@ -128,7 +152,7 @@ namespace task27_10_15
 
                 //pushpinLayer.Children(pushpin);
 
-            }
+            
         }
 
         private void gv1_SelectionChanged(object sender, SelectionChangedEventArgs e)

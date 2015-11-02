@@ -66,7 +66,7 @@ namespace task27_10_15
     }
 
     public class Result
-    {
+    { 
         public Geometry geometry { get; set; }
         public string icon { get; set; }
         public string id { get; set; }
@@ -89,6 +89,18 @@ namespace task27_10_15
         public string next_page_token { get; set; }
         public List<Result> results { get; set; }
         public string status { get; set; }
+    }
+
+
+    [Table("Favourite")]
+    public class Favourite
+    {
+        [Column("placeName")]
+        public string  placeName { get; set; }
+        [Column("userName")]
+        public string  userName { get; set; }
+        [Column("id")]
+        public int id { get; set; }
     }
 
 
